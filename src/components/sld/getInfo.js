@@ -6,13 +6,11 @@ import "../../styles/nexus.css";
 const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/v1/";
 
 const GetInfo = () => {
-  const [accountId, setAccountId] = React.useState("");
+  const [countryId, setCountryId] = React.useState("");
 
   const getSld = () => {
     axios
-      .get(`${URL}sld?country_id=us`, {
-        account_id: accountId,
-      })
+      .get(`${URL}sld?country_id=${countryId}`)
       .then((res) => console.log(res.data))
       .catch((err) => console.error(err));
   };
@@ -24,10 +22,10 @@ const GetInfo = () => {
           <input
             type="text"
             onChange={(e) => {
-              setAccountId(e.target.value);
+              setCountryId(e.target.value);
             }}
           />
-          <label>Account ID</label>
+          <label>Country ID</label>
         </div>
         <button onClick={getSld} type="submit">
           Submit
