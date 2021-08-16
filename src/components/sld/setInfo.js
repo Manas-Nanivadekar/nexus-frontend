@@ -7,6 +7,7 @@ const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/v1/";
 
 function SetInfo() {
   const [iban, setIban] = React.useState(false);
+  const [countryId, setCountryId] = React.useState(false);
   const [localBankNumber, setLocalBankNumber] = React.useState("");
   const [localBankId, setLocalBankId] = React.useState("");
   const [aliasConversion, setAliasConversion] = React.useState(false);
@@ -21,9 +22,8 @@ function SetInfo() {
 
   const setSld = () => {
     axios
-      .post(`${URL}sld?country_id=us`, {
+      .post(`${URL}sld?country_id=${countryId}`, {
         iban: iban,
-        // country_id:
         local_bank_number: localBankNumber,
         local_bank_id: localBankId,
         alias_conversion: aliasConversion,
@@ -45,6 +45,8 @@ function SetInfo() {
       <div className="inputs">
         <label>IBAN</label>
         <input onChange={(e) => setIban(e.target.value)} type="text" />
+        <label>Country Number</label>
+        <input onChange={(e) => setCountryId(e.target.value)} type="text" />
         <label>Local Bank Number</label>
         <input
           onChange={(e) => setLocalBankNumber(e.target.value)}
