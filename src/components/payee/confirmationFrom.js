@@ -10,49 +10,119 @@ function ConfirmationFrom() {
   const [destBankId, setDestBankId] = React.useState();
   const [destBankAccNumber, setDestBankAccNumber] = React.useState();
 
-  const confirmTo = () => {
-    axios
-      .post(`${URL}confirmto`, {
-        destination_country_id: destCountryId,
-        destination_bank_identifier: destBankId,
-        destination_bank_account_number: destBankAccNumber,
-      })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err));
+  const [data, setData] = React.useState();
+  const [fetched, setFetched] = React.useState(false);
+
+  const confirmTo = async () => {
+    const axiosInfo = await axios.post(`${URL}confirmto`, {
+      destination_country_id: destCountryId,
+      destination_bank_identifier: destBankId,
+      destination_bank_account_number: destBankAccNumber,
+    });
+    await setData(axiosInfo);
+    await setFetched(true);
   };
 
-  return (
-    <div className="container">
-      <div className="brand-title">
-        <div className="inputs">
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestCountryId(e.target.value);
-            }}
-          />
-          <label> Destination Country ID</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestBankId(e.target.value);
-            }}
-          />
-          <label>Destination Bank ID</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestBankAccNumber(e.target.value);
-            }}
-          />
-          <label>Destination Bank Number</label>
+  if (fetched === false) {
+    return (
+      <div className="container">
+        <div className="brand-title">
+          <div className="inputs">
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestCountryId(e.target.value);
+              }}
+            />
+            <label> Destination Country ID</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankId(e.target.value);
+              }}
+            />
+            <label>Destination Bank ID</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankAccNumber(e.target.value);
+              }}
+            />
+            <label>Destination Bank Number</label>
+          </div>
+          <button onClick={confirmTo} type="submit">
+            Submit
+          </button>
         </div>
-        <button onClick={confirmTo} type="submit">
-          Submit
-        </button>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div
+        style={{
+          margin: "40px 0",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "3rem",
+          borderRadius: "30px",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 8px 8px -4px lightblue",
+        }}
+      >
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          {data.data.hash}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            alignItems: "center",
+            margin: "3rem",
+          }}
+        >
+          {data.data.event.map((item) => {
+            return (
+              <p
+                style={{
+                  width: "120px",
+                  height: "60px",
+                  backgroundColor: "#F6C6EA",
+                  padding: "1rem 0",
+                  justifyContent: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  borderRadius: "0.6rem",
+                  margin: "20px",
+                  color: "#334257",
+                  boxShadow: "0 4px 4px -4px gray",
+                  fontWeight: 700,
+                  fontSize: "1rem",
+                }}
+              >
+                {`${item}`}
+              </p>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default ConfirmationFrom;

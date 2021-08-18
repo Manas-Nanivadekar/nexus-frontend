@@ -24,161 +24,234 @@ const SetFinal = () => {
   const [destBankAccDop, setDestBankAccDop] = React.useState("");
   const [destBankAccNationId, setDestBankAccNationId] = React.useState("");
 
-  const FinalSubmit = () => {
-    axios
-      .post(`${URL}final`, {
-        settlementAmount,
-        clearingSystemRef,
-        chargeBearer,
-        quoteUuid,
-        ipSource,
-        sourceBankId,
-        sourceBankAccNumber,
-        sourceBankAccAdd,
-        sourceBankAccDob,
-        sourceBankAccDop,
-        sourceBankAccNationId,
-        destBankId,
-        destBankAccNumber,
-        destBankAccAdd,
-        destBankAccDob,
-        destBankAccDop,
-        destBankAccNationId,
-      })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err));
+  const [data, setData] = React.useState();
+  const [fetched, setFetched] = React.useState(false);
+
+  const FinalSubmit = async () => {
+    const axiosInfo = await axios.post(`${URL}final`, {
+      settlementAmount,
+      clearingSystemRef,
+      chargeBearer,
+      quoteUuid,
+      ipSource,
+      sourceBankId,
+      sourceBankAccNumber,
+      sourceBankAccAdd,
+      sourceBankAccDob,
+      sourceBankAccDop,
+      sourceBankAccNationId,
+      destBankId,
+      destBankAccNumber,
+      destBankAccAdd,
+      destBankAccDob,
+      destBankAccDop,
+      destBankAccNationId,
+    });
+    await setData(axiosInfo);
+    await setFetched(true);
   };
 
-  return (
-    <div className="container">
-      <div className="brank-title">
-        <div className="inputs">
-          <label>Settlement Amount</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSettlementAmount(e.target.value);
-            }}
-          />
-          <label>Clearing System Ref</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setClearingSystemRef(e.target.value);
-            }}
-          />
-          <label>Charge Bearer</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setChargeBearer(e.target.value);
-            }}
-          />
-          <label>Quote UUID</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setQuoteUuid(e.target.value);
-            }}
-          />
-          <label>IP Source</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setIpSource(e.target.value);
-            }}
-          />
-          <label>Source Bank ID</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSourceBankId(e.target.value);
-            }}
-          />
-          <label>Source Bank Account Number</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSourceBankAccNumber(e.target.value);
-            }}
-          />
-          <label>Source Bank Account Address</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSourceBankAccAdd(e.target.value);
-            }}
-          />
-          <label>Source Bank Account Date of Birth</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSourceBankAccDob(e.target.value);
-            }}
-          />
-          <label>Source Bank Account Date of Profile</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSourceBankAccDop(e.target.value);
-            }}
-          />
-          <label>Source Bank Account</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSourceBankAccNationId(e.target.value);
-            }}
-          />
-          <label>Destination Bank ID</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestBankId(e.target.value);
-            }}
-          />
-          <label>Destination Bank Account Number</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestBankAccNumber(e.target.value);
-            }}
-          />
-          <label>Destination Bank Account Address</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestBankAccAdd(e.target.value);
-            }}
-          />
-          <label>Destination Bank Account Date of Birth</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestBankAccDob(e.target.value);
-            }}
-          />
-          <label>Destination Bank Account Date of Profile</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestBankAccDop(e.target.value);
-            }}
-          />
-          <label>Destination Bank Account</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestBankAccNationId(e.target.value);
-            }}
-          />
+  if (fetched === false) {
+    return (
+      <div className="container">
+        <div className="brank-title">
+          <div className="inputs">
+            <label>Settlement Amount</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSettlementAmount(e.target.value);
+              }}
+            />
+            <label>Clearing System Ref</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setClearingSystemRef(e.target.value);
+              }}
+            />
+            <label>Charge Bearer</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setChargeBearer(e.target.value);
+              }}
+            />
+            <label>Quote UUID</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setQuoteUuid(e.target.value);
+              }}
+            />
+            <label>IP Source</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setIpSource(e.target.value);
+              }}
+            />
+            <label>Source Bank ID</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSourceBankId(e.target.value);
+              }}
+            />
+            <label>Source Bank Account Number</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSourceBankAccNumber(e.target.value);
+              }}
+            />
+            <label>Source Bank Account Address</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSourceBankAccAdd(e.target.value);
+              }}
+            />
+            <label>Source Bank Account Date of Birth</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSourceBankAccDob(e.target.value);
+              }}
+            />
+            <label>Source Bank Account Date of Profile</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSourceBankAccDop(e.target.value);
+              }}
+            />
+            <label>Source Bank Account</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSourceBankAccNationId(e.target.value);
+              }}
+            />
+            <label>Destination Bank ID</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankId(e.target.value);
+              }}
+            />
+            <label>Destination Bank Account Number</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankAccNumber(e.target.value);
+              }}
+            />
+            <label>Destination Bank Account Address</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankAccAdd(e.target.value);
+              }}
+            />
+            <label>Destination Bank Account Date of Birth</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankAccDob(e.target.value);
+              }}
+            />
+            <label>Destination Bank Account Date of Profile</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankAccDop(e.target.value);
+              }}
+            />
+            <label>Destination Bank Account</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankAccNationId(e.target.value);
+              }}
+            />
+          </div>
+          <button onClick={FinalSubmit} type="submit">
+            Submit
+          </button>
         </div>
-        <button onClick={FinalSubmit} type="submit">
-          Submit
-        </button>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div
+        style={{
+          margin: "40px 0",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "3rem",
+          borderRadius: "30px",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 8px 8px -4px lightblue",
+        }}
+      >
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          {data.data.hash}
+        </p>
+
+        {console.log(data)}
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            alignItems: "center",
+            margin: "3rem",
+          }}
+        >
+          {/* {data.data.event.map((item) => { */}
+          {/* return ( */}
+          <p
+            style={{
+              width: "120px",
+              height: "60px",
+              backgroundColor: "#F6C6EA",
+              padding: "1rem 0",
+              justifyContent: "center",
+              display: "flex",
+              alignItems: "center",
+              borderRadius: "0.6rem",
+              margin: "20px",
+              color: "#334257",
+              boxShadow: "0 4px 4px -4px gray",
+              fontWeight: 700,
+              fontSize: "1rem",
+            }}
+          >
+            {`${data.message}`}
+            {`${data.status}`}
+          </p>
+          {/* ); */}
+          {/* })} */}
+        </div>
+      </div>
+    );
+  }
 };
 
 export default SetFinal;

@@ -11,27 +11,8 @@ const GetInfo = () => {
   const [fetched, setFetched] = React.useState(false);
 
   const getSld = async () => {
-    // const axiosInfo = await axios.get(`${URL}sld?country_id=${countryId}`);
-    // await setData(axiosInfo);
-    await setData({
-      data: {
-        hash: "0x11d908b6ff7e06a4d324c858ba5430092ff8c2aa75e2b7289cda4a20946ba003",
-        event: [
-          true,
-          "US",
-          "1244342",
-          "12424",
-          true,
-          "Ethan",
-          "Something",
-          "Hunt",
-          "10000",
-          true,
-          true,
-          "1000",
-        ],
-      },
-    });
+    const axiosInfo = await axios.get(`${URL}sld?country_id=${countryId}`);
+    await setData(axiosInfo);
     await setFetched(true);
   };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import "../../styles/nexus.css";
 
@@ -10,93 +11,180 @@ const SetQuoteRouter = () => {
   const [destLp, setDestLp] = React.useState("");
   const [rate, setRate] = React.useState("");
   const [publicAvail, setPublicAvail] = React.useState(false);
-  const [timestamp, setTimestamp] = React.useState(0);
   const [sourceBankId, setBankId] = React.useState("");
   const [sourceCurrency, setSourceCurrency] = React.useState("");
   const [destinationCurrency, setDestinationCurrency] = React.useState("");
 
-  const deletation = () => {
-    axios.post(
+  const [data, setData] = React.useState();
+  const [fetched, setFetched] = React.useState(false);
+
+  const style = {
+    color: "black",
+    textDecoration: "none",
+  };
+
+  const deletation = async () => {
+    const axiosInfo = await axios.post(
       `${URL}quote?cource_currency=${sourceCurrency}&destination_currency=${destinationCurrency}`,
       {
         source_lp: sourceLp,
         destination_lp: destLp,
         rate: rate,
         public: publicAvail,
-        timestamp: timestamp,
         source_bank_id: sourceBankId,
       }
     );
+    await setData(axiosInfo);
+    await setFetched(true);
   };
 
-  return (
-    <div className="container">
-      <div className="brand-title">
-        <div className="inputs">
-          <label>Source Currency</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSourceCurrency(e.target.value);
-            }}
-          />
-          <label>Destination Currency</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestinationCurrency(e.target.value);
-            }}
-          />
-          <label>Source Lp</label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setSourceLp(e.target.value);
-            }}
-          />
-          <label> Destination LP </label>
+  if (fetched === false) {
+    return (
+      <div className="container">
+        <div className="brand-title">
+          <div className="inputs">
+            <label>Source Currency</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSourceCurrency(e.target.value);
+              }}
+            />
+            <label>Destination Currency</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestinationCurrency(e.target.value);
+              }}
+            />
+            <label>Source Lp</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setSourceLp(e.target.value);
+              }}
+            />
+            <label> Destination LP </label>
 
-          <input
-            type="text"
-            onChange={(e) => {
-              setDestLp(e.target.value);
-            }}
-          />
-          <label> Set Rate </label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setRate(e.target.value);
-            }}
-          />
-          <label> Is Public Available </label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setPublicAvail(e.target.value);
-            }}
-          />
-          <label> Time Stamp </label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setTimestamp(e.target.value);
-            }}
-          />
-          <label> Bank Id </label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setBankId(e.target.value);
-            }}
-          />
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestLp(e.target.value);
+              }}
+            />
+            <label> Set Rate </label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setRate(e.target.value);
+              }}
+            />
+            <label> Is Public Available </label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setPublicAvail(e.target.value);
+              }}
+            />
+            <label> Bank Id </label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setBankId(e.target.value);
+              }}
+            />
+          </div>
+          <button onClick={deletation} type="submit">
+            Submit
+          </button>
         </div>
-        <button onClick={deletation} type="submit">
-          Submit
-        </button>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div
+        style={{
+          margin: "40px 0",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "3rem",
+          borderRadius: "30px",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 8px 8px -4px lightblue",
+        }}
+      >
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          {data.data.hash}
+        </p>
+
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          {`${data.data.message}`}
+        </p>
+
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          {` Exchange Provider UUID ${data.data.fxp_uuid}`}
+        </p>
+
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          {` Quote UUID ${data.data.quote_uuid}`}
+        </p>
+
+        <Link target="_blank" style={style} to="/quote/get">
+          <h1> Get Rates </h1>
+        </Link>
+      </div>
+    );
+  }
 };
 
 export default SetQuoteRouter;

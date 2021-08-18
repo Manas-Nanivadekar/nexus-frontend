@@ -12,11 +12,6 @@ function Quote() {
       <Link style={style} to="/quote/set">
         <h1> Provide Rate </h1>
       </Link>
-      <h2> Or </h2>
-      <Link style={style} to="/quote/get">
-        <h1> Get Rates </h1>
-      </Link>
-      <h2> Or </h2>
       <Link style={style} to="/quote/del">
         <h1> Delete Rates </h1>
       </Link>

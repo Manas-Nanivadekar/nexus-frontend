@@ -37,7 +37,7 @@ function SetInfo() {
       payee_type: payeeType,
       ips_timeout: ipsTimeout,
     });
-    await setData(axiosInfo.data);
+    await setData(axiosInfo);
     await setFetched(true);
   };
 
@@ -88,11 +88,69 @@ function SetInfo() {
     );
   } else {
     return (
-      <>
-        <h1> Hello World </h1>
-        {console.log(data)}
-        <p> {data.hash} </p>
-      </>
+      <div
+        style={{
+          margin: "40px 0",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "3rem",
+          borderRadius: "30px",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 8px 8px -4px lightblue",
+        }}
+      >
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          {data}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            alignItems: "center",
+            margin: "3rem",
+          }}
+        >
+          {data.data.event.map((item) => {
+            return (
+              <p
+                style={{
+                  width: "120px",
+                  height: "60px",
+                  backgroundColor: "#F6C6EA",
+                  padding: "1rem 0",
+                  justifyContent: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  borderRadius: "0.6rem",
+                  margin: "20px",
+                  color: "#334257",
+                  boxShadow: "0 4px 4px -4px gray",
+                  fontWeight: 700,
+                  fontSize: "1rem",
+                }}
+              >
+                {`${item}`}
+              </p>
+            );
+          })}
+        </div>
+      </div>
     );
   }
 }
