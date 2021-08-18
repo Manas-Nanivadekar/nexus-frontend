@@ -2,8 +2,14 @@ import React from "react";
 import axios from "axios";
 
 import "../../styles/nexus.css";
+import { Link } from "react-router-dom";
 
 const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/v1/";
+
+const style = {
+  color: "black",
+  textDecoration: "none",
+};
 
 const GetInfo = () => {
   const [countryId, setCountryId] = React.useState("");
@@ -21,13 +27,13 @@ const GetInfo = () => {
       <div className="container">
         <div className="brand-title">
           <div className="inputs">
+            <label>Country ID</label>
             <input
               type="text"
               onChange={(e) => {
                 setCountryId(e.target.value);
               }}
             />
-            <label>Country ID</label>
           </div>
           <button onClick={getSld} type="submit">
             Submit
@@ -50,6 +56,9 @@ const GetInfo = () => {
           boxShadow: "0 8px 8px -4px lightblue",
         }}
       >
+        <Link style={style} to="/">
+          <h1> Go to Home Page </h1>
+        </Link>
         <p
           style={{
             display: "flex",

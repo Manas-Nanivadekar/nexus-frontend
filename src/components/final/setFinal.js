@@ -2,8 +2,14 @@ import React from "react";
 import axios from "axios";
 
 import "../../styles/nexus.css";
+import { Link } from "react-router-dom";
 
 const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/v1/";
+
+const style = {
+  color: "black",
+  textDecoration: "none",
+};
 
 const SetFinal = () => {
   const [settlementAmount, setSettlementAmount] = React.useState("");
@@ -210,45 +216,14 @@ const SetFinal = () => {
             fontSize: "1rem",
           }}
         >
-          {data.data.hash}
+          {data.data.paymentId}
         </p>
 
         {console.log(data)}
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            alignItems: "center",
-            margin: "3rem",
-          }}
-        >
-          {/* {data.data.event.map((item) => { */}
-          {/* return ( */}
-          <p
-            style={{
-              width: "120px",
-              height: "60px",
-              backgroundColor: "#F6C6EA",
-              padding: "1rem 0",
-              justifyContent: "center",
-              display: "flex",
-              alignItems: "center",
-              borderRadius: "0.6rem",
-              margin: "20px",
-              color: "#334257",
-              boxShadow: "0 4px 4px -4px gray",
-              fontWeight: 700,
-              fontSize: "1rem",
-            }}
-          >
-            {`${data.message}`}
-            {`${data.status}`}
-          </p>
-          {/* ); */}
-          {/* })} */}
-        </div>
+        <Link style={style} to="/final/get" target="_blank">
+          <h1>Get Data</h1>
+        </Link>
       </div>
     );
   }

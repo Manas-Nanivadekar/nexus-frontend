@@ -1,9 +1,16 @@
 import React from "react";
 import axios from "axios";
 
+import { Link } from "react-router-dom";
+
 import "../../styles/nexus.css";
 
 const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/v1/";
+
+const style = {
+  color: "black",
+  textDecoration: "none",
+};
 
 function ConfirmationFrom() {
   const [destCountryId, setDestCountryId] = React.useState();
@@ -71,6 +78,9 @@ function ConfirmationFrom() {
           boxShadow: "0 8px 8px -4px lightblue",
         }}
       >
+        <Link style={style} to="/">
+          <h1> Go to Home Page </h1>
+        </Link>
         <p
           style={{
             display: "flex",

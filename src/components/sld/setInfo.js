@@ -2,9 +2,14 @@ import React from "react";
 import axios from "axios";
 
 import "../../styles/nexus.css";
-// import Output from "../../pages/output";
+import { Link } from "react-router-dom";
 
 const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/v1/";
+
+const style = {
+  color: "black",
+  textDecoration: "none",
+};
 
 function SetInfo() {
   const [iban, setIban] = React.useState(false);
@@ -114,42 +119,28 @@ function SetInfo() {
             fontSize: "1rem",
           }}
         >
-          {data}
+          {data.data.hash}
         </p>
 
-        <div
+        <p
           style={{
             display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            alignItems: "center",
-            margin: "3rem",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
           }}
         >
-          {data.data.event.map((item) => {
-            return (
-              <p
-                style={{
-                  width: "120px",
-                  height: "60px",
-                  backgroundColor: "#F6C6EA",
-                  padding: "1rem 0",
-                  justifyContent: "center",
-                  display: "flex",
-                  alignItems: "center",
-                  borderRadius: "0.6rem",
-                  margin: "20px",
-                  color: "#334257",
-                  boxShadow: "0 4px 4px -4px gray",
-                  fontWeight: 700,
-                  fontSize: "1rem",
-                }}
-              >
-                {`${item}`}
-              </p>
-            );
-          })}
-        </div>
+          {data.data.message}
+        </p>
+
+        <Link target="_blank" style={style} to="/sld/get">
+          <h1> Get SLD Info </h1>
+        </Link>
       </div>
     );
   }

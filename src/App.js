@@ -18,6 +18,7 @@ import ConfirmationFrom from "./components/payee/confirmationFrom";
 import ConfirmationTo from "./components/payee/confirmationTo";
 
 import SetFinal from "./components/final/setFinal";
+import GetFinal from "./components/final/getFinal";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/payee/from" component={ConfirmationFrom} />
           <Route path="/payee/to" component={ConfirmationTo} />
           <Route path="/final/set" component={SetFinal} />
+          <Route path="/final/get" component={GetFinal} />
         </Switch>
       </div>
     </Router>
