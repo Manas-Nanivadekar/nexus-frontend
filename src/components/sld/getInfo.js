@@ -11,8 +11,27 @@ const GetInfo = () => {
   const [fetched, setFetched] = React.useState(false);
 
   const getSld = async () => {
-    const axiosInfo = await axios.get(`${URL}sld?country_id=${countryId}`);
-    await setData(axiosInfo);
+    // const axiosInfo = await axios.get(`${URL}sld?country_id=${countryId}`);
+    // await setData(axiosInfo);
+    await setData({
+      data: {
+        hash: "0x11d908b6ff7e06a4d324c858ba5430092ff8c2aa75e2b7289cda4a20946ba003",
+        event: [
+          true,
+          "US",
+          "1244342",
+          "12424",
+          true,
+          "Ethan",
+          "Something",
+          "Hunt",
+          "10000",
+          true,
+          true,
+          "1000",
+        ],
+      },
+    });
     await setFetched(true);
   };
 
@@ -37,58 +56,69 @@ const GetInfo = () => {
     );
   } else {
     return (
-      <>
-        <div>
-          <p
-            style={{
-              display: "flex",
-              backgroundColor: "white",
-              padding: "1rem 0",
-              borderRadius: "0.6rem",
-              margin: "12px 0",
-              color: "#00152A",
-              fontWeight: 700,
-              boxShadow: "0 4px 4px -4px gray",
-              fontSize: "1rem",
-            }}
-          >
-            {" "}
-            {data.data.hash}{" "}
-          </p>
-        </div>
+      <div
+        style={{
+          margin: "40px 0",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "3rem",
+          borderRadius: "30px",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 8px 8px -4px lightblue",
+        }}
+      >
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          {data.data.hash}
+        </p>
+
         <div
           style={{
             display: "flex",
+            justifyContent: "center",
             flexWrap: "wrap",
-            padding: "3rem",
-            borderRadius: "30px",
-            backgroundColor: "#EEF3F5",
-            boxShadow: "0 8px 8px -4px lightblue",
+            alignItems: "center",
+            margin: "3rem",
           }}
         >
-          {console.log(data)}
-
           {data.data.event.map((item) => {
             return (
               <p
                 style={{
-                  backgroundColor: "white",
+                  width: "120px",
+                  height: "60px",
+                  backgroundColor: "#F6C6EA",
                   padding: "1rem 0",
+                  justifyContent: "center",
+                  display: "flex",
+                  alignItems: "center",
                   borderRadius: "0.6rem",
-                  margin: "12px 0",
-                  color: "#00152A",
+                  margin: "20px",
+                  color: "#334257",
                   boxShadow: "0 4px 4px -4px gray",
                   fontWeight: 700,
                   fontSize: "1rem",
                 }}
               >
-                {" "}
-                {`${item}`}{" "}
+                {`${item}`}
               </p>
             );
           })}
         </div>
-      </>
+      </div>
     );
   }
 };
