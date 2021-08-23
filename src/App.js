@@ -18,6 +18,9 @@ import ConfirmationFrom from "./components/payee/confirmationFrom";
 import ConfirmationTo from "./components/payee/confirmationTo";
 
 import SetFinal from "./components/final/setFinal";
+import GetFinal from "./components/final/getFinal";
+import SetDestFinal from "./components/final/setDestFinal";
+import SetSourceFinal from "./components/final/setSourceFinal";
 
 function App() {
   return (
@@ -37,6 +40,9 @@ function App() {
           <Route path="/payee/from" component={ConfirmationFrom} />
           <Route path="/payee/to" component={ConfirmationTo} />
           <Route path="/final/set" component={SetFinal} />
+          <Route path="/final/get" component={GetFinal} />
+          <Route path="/final/dest" component={SetDestFinal} />
+          <Route path="/final/source" component={SetSourceFinal} />
         </Switch>
       </div>
     </Router>

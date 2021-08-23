@@ -12,10 +12,8 @@ function Payee() {
       <Link style={style} to="/payee/to">
         <h1> Step 1 Confirmation on Behalf of Destination Bank </h1>
       </Link>
-      <h2> Then </h2>
-      <Link style={style} to="/payee/from">
-        <h1> Step 2 Confirmation Of Payee </h1>
-      </Link>
+      <h3> ***Subprocess that needs to be done by Nexus*** </h3>
+      <h4> ***For test purpose this needs to be done manually*** </h4>
     </div>
   );
 }

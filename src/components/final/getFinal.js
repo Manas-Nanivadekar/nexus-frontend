@@ -1,31 +1,26 @@
 import React from "react";
 import axios from "axios";
-
 import { Link } from "react-router-dom";
 
 import "../../styles/nexus.css";
 
-const URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000/v1/";
+const URL = "http://localhost:5000/v1/";
 
 const style = {
   color: "black",
   textDecoration: "none",
 };
 
-function ConfirmationFrom() {
-  const [destCountryId, setDestCountryId] = React.useState();
-  const [destBankId, setDestBankId] = React.useState();
-  const [destBankAccNumber, setDestBankAccNumber] = React.useState();
+const style_two = {
+  color: "black",
+};
 
+function GetFinal() {
   const [data, setData] = React.useState();
   const [fetched, setFetched] = React.useState(false);
-
-  const confirmTo = async () => {
-    const axiosInfo = await axios.post(`${URL}confirmto`, {
-      destination_country_id: destCountryId,
-      destination_bank_identifier: destBankId,
-      destination_bank_account_number: destBankAccNumber,
-    });
+  const [paymentId, setPaymentId] = React.useState("");
+  const getFinal = async () => {
+    const axiosInfo = await axios.get(`${URL}final?${paymentId}`);
     await setData(axiosInfo);
     await setFetched(true);
   };
@@ -35,29 +30,11 @@ function ConfirmationFrom() {
       <div className="container">
         <div className="brand-title">
           <div className="inputs">
-            <input
-              type="text"
-              onChange={(e) => {
-                setDestCountryId(e.target.value);
-              }}
-            />
-            <label> Destination Country ID</label>
-            <input
-              type="text"
-              onChange={(e) => {
-                setDestBankId(e.target.value);
-              }}
-            />
-            <label>Destination Bank ID</label>
-            <input
-              type="text"
-              onChange={(e) => {
-                setDestBankAccNumber(e.target.value);
-              }}
-            />
-            <label>Destination Bank Number</label>
+            <p> *Please copy payment UUID from previous page* </p>
+            <label>Payment Id</label>
+            <input type="text" onChange={(e) => setPaymentId(e.target.value)} />
           </div>
-          <button onClick={confirmTo} type="submit">
+          <button onClick={getFinal} type="submit">
             Submit
           </button>
         </div>
@@ -81,6 +58,23 @@ function ConfirmationFrom() {
         <Link style={style} to="/">
           <h1> Go to Home Page </h1>
         </Link>
+        <div>
+          <h3>
+            {" "}
+            If only currencies are showing then fork the API collection, and
+            follow the below steps
+          </h3>
+          <h4> 1. Go to Payment Folder </h4>
+          <h4> 2. Go to Get reqest </h4>
+          <h4> 3. Change the Payment Id in Params </h4>
+          <h4> 4. You'll get the result </h4>
+          <a
+            style={style_two}
+            href="https://god.gw.postman.com/run-collection/13139793-849e84d7-a40a-4ee2-9619-f21c11d46124?action=collection%2Ffork&collection-url=entityId%3D13139793-849e84d7-a40a-4ee2-9619-f21c11d46124%26entityType%3Dcollection%26workspaceId%3D044d6cac-9508-4fce-86cc-afa6d89f90a0"
+          >
+            Fork Collection
+          </a>
+        </div>
         <p
           style={{
             display: "flex",
@@ -95,22 +89,6 @@ function ConfirmationFrom() {
           }}
         >
           {data.data.hash}
-        </p>
-
-        <p
-          style={{
-            display: "flex",
-            backgroundColor: "#F6C6EA",
-            padding: "1rem",
-            borderRadius: "0.6rem",
-            margin: "12px 0",
-            color: "#334257",
-            fontWeight: 700,
-            boxShadow: "0 4px 4px -4px gray",
-            fontSize: "1rem",
-          }}
-        >
-          Please Ignore '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'
         </p>
 
         <div
@@ -151,4 +129,4 @@ function ConfirmationFrom() {
   }
 }
 
-export default ConfirmationFrom;
+export default GetFinal;
