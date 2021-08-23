@@ -10,7 +10,7 @@ const SetQuoteRouter = () => {
   const [sourceLp, setSourceLp] = React.useState("");
   const [destLp, setDestLp] = React.useState("");
   const [rate, setRate] = React.useState("");
-  const [publicAvail, setPublicAvail] = React.useState(false);
+  const [publicAvail, setPublicAvail] = React.useState("");
   const [sourceBankId, setBankId] = React.useState("");
   const [sourceCurrency, setSourceCurrency] = React.useState("");
   const [destinationCurrency, setDestinationCurrency] = React.useState("");
@@ -25,7 +25,7 @@ const SetQuoteRouter = () => {
 
   const deletation = async () => {
     const axiosInfo = await axios.post(
-      `${URL}quote?cource_currency=${sourceCurrency}&destination_currency=${destinationCurrency}`,
+      `${URL}quote?source_currency=${sourceCurrency}&destination_currency=${destinationCurrency}`,
       {
         source_lp: sourceLp,
         destination_lp: destLp,
@@ -45,53 +45,52 @@ const SetQuoteRouter = () => {
           <div className="inputs">
             <label>Source Currency</label>
             <input
-              type="text"
               onChange={(e) => {
                 setSourceCurrency(e.target.value);
               }}
+              type="text"
             />
             <label>Destination Currency</label>
             <input
-              type="text"
               onChange={(e) => {
                 setDestinationCurrency(e.target.value);
               }}
+              type="text"
             />
             <label>Source Lp</label>
             <input
-              type="text"
               onChange={(e) => {
                 setSourceLp(e.target.value);
               }}
+              type="text"
             />
             <label> Destination LP </label>
-
             <input
-              type="text"
               onChange={(e) => {
                 setDestLp(e.target.value);
               }}
+              type="text"
             />
             <label> Set Rate </label>
             <input
-              type="text"
               onChange={(e) => {
                 setRate(e.target.value);
               }}
+              type="text"
             />
             <label> Is Public Available </label>
             <input
-              type="text"
               onChange={(e) => {
                 setPublicAvail(e.target.value);
               }}
+              type="text"
             />
             <label> Bank Id </label>
             <input
-              type="text"
               onChange={(e) => {
                 setBankId(e.target.value);
               }}
+              type="text"
             />
           </div>
           <button onClick={deletation} type="submit">
@@ -160,7 +159,7 @@ const SetQuoteRouter = () => {
             fontSize: "1rem",
           }}
         >
-          {` Exchange Provider UUID ${data.data.fxp_uuid}`}
+          {` Exchange Provider UUID = ${data.data.fxp_uuid}`}
         </p>
 
         <p
@@ -176,7 +175,7 @@ const SetQuoteRouter = () => {
             fontSize: "1rem",
           }}
         >
-          {` Quote UUID ${data.data.quote_uuid}`}
+          {` Quote UUID =  ${data.data.quote_uuid}`}
         </p>
 
         <Link target="_blank" style={style} to="/quote/get">

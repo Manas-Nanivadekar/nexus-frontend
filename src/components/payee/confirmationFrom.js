@@ -97,6 +97,22 @@ function ConfirmationFrom() {
           {data.data.hash}
         </p>
 
+        <p
+          style={{
+            display: "flex",
+            backgroundColor: "#F6C6EA",
+            padding: "1rem",
+            borderRadius: "0.6rem",
+            margin: "12px 0",
+            color: "#334257",
+            fontWeight: 700,
+            boxShadow: "0 4px 4px -4px gray",
+            fontSize: "1rem",
+          }}
+        >
+          Please Ignore '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'
+        </p>
+
         <div
           style={{
             display: "flex",

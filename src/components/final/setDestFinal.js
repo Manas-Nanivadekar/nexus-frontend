@@ -11,24 +11,29 @@ const style = {
   textDecoration: "none",
 };
 
-const SetFinal = () => {
-  const [settlementAmount, setSettlementAmount] = React.useState("");
-  const [clearingSystemRef, setClearingSystemRef] = React.useState("");
-  const [chargeBearer, setChargeBearer] = React.useState("");
-  const [quoteUuid, setQuoteUuid] = React.useState("");
-  const [ipSource, setIpSource] = React.useState("");
+function SetDestFinal() {
+  const [destBankId, setDestBankId] = React.useState("");
+  const [destBankAccNumber, setDestBankAccNumber] = React.useState("");
+  const [destBankAccAdd, setDestBankAccAdd] = React.useState("");
+  const [destBankAccDob, setDestBankAccDob] = React.useState("");
+  const [destBankAccDop, setDestBankAccDop] = React.useState("");
+  const [destBankAccNationId, setDestBankAccNationId] = React.useState("");
+  const [paymentId, setPaymentId] = React.useState("");
 
   const [data, setData] = React.useState();
   const [fetched, setFetched] = React.useState(false);
 
-  const FinalSubmit = async () => {
-    const axiosInfo = await axios.post(`${URL}final`, {
-      settlementAmount,
-      clearingSystemRef,
-      chargeBearer,
-      quoteUuid,
-      ipSource,
+  const destSubmit = async () => {
+    const axiosInfo = await axios.post(`${URL}finaldest`, {
+      paymentId,
+      destBankId,
+      destBankAccNumber,
+      destBankAccAdd,
+      destBankAccDob,
+      destBankAccDop,
+      destBankAccNationId,
     });
+
     await setData(axiosInfo);
     await setFetched(true);
   };
@@ -38,43 +43,58 @@ const SetFinal = () => {
       <div className="container">
         <div className="brand-title">
           <div className="inputs">
-            <label>Settlement Amount</label>
+            <p> *Please copy payment UUID from previous page* </p>
+            <label>Payment Id UUID</label>
             <input
               type="text"
               onChange={(e) => {
-                setSettlementAmount(e.target.value);
+                setPaymentId(e.target.value);
               }}
             />
-            <label>Clearing System Ref</label>
+            <label>Destination Bank ID</label>
             <input
               type="text"
               onChange={(e) => {
-                setClearingSystemRef(e.target.value);
+                setDestBankId(e.target.value);
               }}
             />
-            <label>Charge Bearer</label>
+            <label>Destination Bank Account Number</label>
             <input
               type="text"
               onChange={(e) => {
-                setChargeBearer(e.target.value);
+                setDestBankAccNumber(e.target.value);
               }}
             />
-            <label>Quote UUID</label>
+            <label>Destination Bank Account Address</label>
             <input
               type="text"
               onChange={(e) => {
-                setQuoteUuid(e.target.value);
+                setDestBankAccAdd(e.target.value);
               }}
             />
-            <label>IP Source</label>
+            <label>Destination Bank Account Date of Birth</label>
             <input
               type="text"
               onChange={(e) => {
-                setIpSource(e.target.value);
+                setDestBankAccDob(e.target.value);
+              }}
+            />
+            <label>Destination Bank Account Date of Profile</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankAccDop(e.target.value);
+              }}
+            />
+            <label>Destination Bank Account</label>
+            <input
+              type="text"
+              onChange={(e) => {
+                setDestBankAccNationId(e.target.value);
               }}
             />
           </div>
-          <button onClick={FinalSubmit} type="submit">
+          <button onClick={destSubmit} type="submit">
             Submit
           </button>
         </div>
@@ -113,12 +133,12 @@ const SetFinal = () => {
 
         {console.log(data)}
 
-        <Link style={style} to="/final/source" target="_blank">
-          <h1>Set the Source Bank data</h1>
+        <Link style={style} to="/final/get" target="_blank">
+          <h1>Get Payment Data</h1>
         </Link>
       </div>
     );
   }
-};
+}
 
-export default SetFinal;
+export default SetDestFinal;

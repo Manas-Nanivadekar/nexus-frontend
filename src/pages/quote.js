@@ -12,9 +12,6 @@ function Quote() {
       <Link style={style} to="/quote/set">
         <h1> Provide Rate </h1>
       </Link>
-      <Link style={style} to="/quote/del">
-        <h1> Delete Rates </h1>
-      </Link>
     </div>
   );
 }
