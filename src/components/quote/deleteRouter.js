@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "../../styles/nexus.css";
 
-const URL = process.env.REACT_APP_BASE_URL || "http://65.2.142.130:5000/v1/";
+const URL = process.env.REACT_APP_BASE_URL || "http://3.108.226.179:5000/v1/";
 
 const DeleteQuote = () => {
   const [uuid, setUuid] = React.useState("");
